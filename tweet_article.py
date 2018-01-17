@@ -9,10 +9,13 @@ consumer_secret = 'CONSUMER_SECRET'
 access_token = 'ACCESS_TOKEN'
 access_secret = 'ACCESS_SECRET'
 
-auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-auth.set_access_token(access_token, access_secret)
-
-api = tweepy.API(auth)
+try:
+    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+    auth.set_access_token(access_token, access_secret)
+except tweepy.TweepError as e:
+    print("Tweepy Error! ", e)
+else:
+    api = tweepy.API(auth)
 
 time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
 
